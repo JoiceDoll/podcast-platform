@@ -12,7 +12,7 @@ Client/logs
 *dist
 *dist-ssr
 *.local
-*.env
+Client/.env
 
 *.vscode/*
 *!.vscode/extensions.json
