@@ -9,7 +9,7 @@ app.use(express.json());
 app.use("/register", registerRouter);
 
 app.listen(process.env.PORT, () => {
-  console.log("Server running at 4000");
+  console.log("Server running at 4000.");
 });
 
 export default app;
