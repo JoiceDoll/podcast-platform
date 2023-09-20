@@ -6,17 +6,19 @@ import { isEqualPassword } from "../../../middlewares/permissions/isEqualPasswor
 async function newAccount(req: Request, res: Response) {
   const { nameData, emailData, passwordData } = req.body;
 
-  const salt = await bcrypt.genSalt(8);
+  try {
+    const salt = await bcrypt.genSalt(8);
+    const hashedPassword = await bcrypt.hash(passwordData, salt);
+    await CreateAccount.account({
+      nameData,
+      emailData,
+      hashedPassword,
+    });
 
-  const hashedPassword = await bcrypt.hash(passwordData, salt);
-
-  await CreateAccount.account({
-    nameData,
-    emailData,
-    hashedPassword,
-  });
-
-  return res.status(200).json({ message: "Success!" });
+    return res.status(200).json({ message: "Success!" });
+  } catch (err) {
+    return res.status(400).json({ message: "Error" });
+  }
 }
 
 export default [isEqualPassword, newAccount];

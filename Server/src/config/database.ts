@@ -1,4 +1,5 @@
 import pg from "pg";
+import "dotenv/config";
 
 const db = new pg.Client({
   user: process.env.DATABASE_USER,
@@ -7,5 +8,7 @@ const db = new pg.Client({
   password: process.env.DATABASE_PASSWORD,
   port: 5432,
 });
+
+
 
 export default db;
