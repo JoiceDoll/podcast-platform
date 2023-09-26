@@ -1,6 +1,7 @@
 import { IRegisterAccount } from "../types/RegisterAccountTypes";
+import { IFindAccount } from "../types/FindAccountTypes";
 import db from "../../../database/database";
-import { RegisterAccount } from "../queries";
+import { RegisterAccount, FindAccount } from "../queries";
 class CreateAccount {
   async store({ nameData, emailData, hashedPassword }: IRegisterAccount) {
     try {
@@ -10,18 +11,14 @@ class CreateAccount {
       return err;
     }
   }
-  // async access({ nameData, emailData, hashedPassword }: IRegister) {
-  //   console.log(nameData, emailData, hashedPassword);
-  //   try {
-  //     await db.connect(),
-  //       await db.query(
-  //         `INSERT INTO clients (name, email, password) VALUES ('${nameData}', '${emailData}', '${hashedPassword}')`
-  //       ),
-  //       await db.end();
-  //   } catch (err) {
-  //     return err;
-  //   }
-  // }
+  async access({ emailData }: IFindAccount) {
+    try {
+      const query = FindAccount(emailData);
+      return await db.query(query);
+    } catch (err) {
+      return err;
+    }
+  }
 }
 
 export default new CreateAccount();
