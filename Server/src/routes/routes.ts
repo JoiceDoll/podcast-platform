@@ -1,15 +1,10 @@
-import app from "../server";
+import app from "../app";
 import { Router } from "express";
 import newAccount from "../api/podVerseServer/controllers/CreateAccountController";
 import { isEqualPassword } from "../middlewares/permissions/isEqualPassword";
-import verifyAccount from "../api/podVerseServer/controllers/FindAccountController";
 
-const registerRouter = Router();
-const selectRouter = Router();
-app.use(registerRouter);
-app.use(selectRouter);
+const routers = Router();
 
-registerRouter.post("/register", isEqualPassword, newAccount);
-selectRouter.get("/auth", verifyAccount);
+routers.post("/api/podverse/register", isEqualPassword, newAccount);
 
-export default {registerRouter, selectRouter}
+export default routers;

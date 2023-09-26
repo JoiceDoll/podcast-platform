@@ -1,4 +1,4 @@
-import db from "../../../config/database";
+import db from "../../../database/database";
 
 class FindAnAccount {
   async find() {

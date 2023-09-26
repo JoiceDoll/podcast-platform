@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import CreateAccount from "../services/accountServices";
+import CreateAccount from "../services/AccountService";
 import { isEqualPassword } from "../../../middlewares/permissions/isEqualPassword";
 
 async function newAccount(req: Request, res: Response) {
@@ -9,7 +9,7 @@ async function newAccount(req: Request, res: Response) {
   try {
     const salt = await bcrypt.genSalt(8);
     const hashedPassword = await bcrypt.hash(passwordData, salt);
-    await CreateAccount.account({
+    await CreateAccount.store({
       nameData,
       emailData,
       hashedPassword,

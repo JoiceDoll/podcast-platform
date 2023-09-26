@@ -1,4 +1,4 @@
-export interface IRegister {
+export interface IRegisterAccount {
   nameData: string;
   emailData: string;
   hashedPassword: string;
