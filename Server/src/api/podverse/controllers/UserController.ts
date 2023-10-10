@@ -1,15 +1,14 @@
 import { Request, Response } from "express";
+import UserService from "../services/UserService";
 class UserController {
-  store(req: Request, res: Response) {
+  async store(req: Request, res: Response) {
     const { name, email, password, confirmPassword } = req.body;
-try{
-
-
-}catch(err){
-    
-}
-
-
+    try {
+      const result = await UserService.store({ name, email, password });
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(400).json("Error");
+    }
   }
 }
 
